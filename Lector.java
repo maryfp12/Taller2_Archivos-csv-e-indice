@@ -124,21 +124,20 @@ public class Lector {
         }
         return false;
     }
-    public static boolean tienePrestamos(int idLector)
-     throws IOException {
-    List<Prestamo> prestamos = Prestamo.leerPrestamo();
-    for (Prestamo p : prestamos) {
-      if (p.getId_lector() == idLector && (p.getFecha_dev() == null || p.getFecha_dev().isEmpty())) {
-            return true;
+    public static boolean tienePrestamo(int idLector)
+            throws IOException {
+        List<Prestamo> lista = Prestamo.leerPrestamo();
+        for (Prestamo p : lista) {
+            if (p.getId_lector() == idLector && (p.getFecha_dev() == null || p.getFecha_dev().isEmpty())) {
+                return true;
+            }
         }
+        return false;
     }
-
-    return false;
-}
 
     public static void eliminarLector(int id)
             throws IOException {
-                 if (tienePrestamos(id)) {
+                 if (tienePrestamo(id)) {
         System.out.println("No se puede eliminar: el lector tiene préstamos registrados ");
         return;
     }
