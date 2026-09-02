@@ -1,43 +1,40 @@
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.Scanner;
 
-public class mostrarMenu{ 
-   static ArrayList<String[]> mostrarMenu = new ArrayList<>();
+public class mostrarMenu { 
     static Scanner sc = new Scanner(System.in); 
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
         int opcion;
         do {
             mostrarMenu();
-            opcion = leerEntero("seleccione una opción: ");
+            opcion = leerEntero("Seleccione una opción: ");
             switch (opcion) {
                 case 1 -> registrarUnlector();
-                case 2 -> listarLector();
+                case 2 -> listarLectores();
                 case 3 -> eliminarLector();
                 case 4 -> registrarPrestamo();
-                case 5 -> listarPrestamo();
+                case 5 -> listarPrestamosPorLector();
                 case 6 -> salirdelMenu(); 
-                System.out.println("Cerrando el sistema. Hasta pronto.");
                 default -> System.out.println("Opción inválida. Intente de nuevo.");
             }
             System.out.println();
         } while (opcion != 6);
         sc.close();
     }
-     static void mostrarMenu() {
+
+    static void mostrarMenu() {
         System.out.println("=== SISTEMA DE BIBLIOTECA ===");
         System.out.println("1. Registrar nuevo lector");
-        System.out.println("2. Listar a un lector");
-        System.out.println("3. Eliminar a un lector ");
-        System.out.println("4. Registar un préstamo");
-        System.out.println("5. Listar un préstamo");
+        System.out.println("2. Listar lectores");
+        System.out.println("3. Eliminar lector");
+        System.out.println("4. Registrar préstamo");
+        System.out.println("5. Listar préstamos de un lector");
         System.out.println("6. Salir");
     }
 
-     static void registrarUnlector() 
-     throws IOException{
-        System.out.println("Ingrese nombre:");
+    static void registrarUnlector() throws IOException {
+        System.out.print("Ingrese nombre: ");
         String nombre = sc.nextLine();
         System.out.print("Ingrese apellido: ");
         String apellido = sc.nextLine();
@@ -53,27 +50,21 @@ public class mostrarMenu{
 
         Lector.crearLector(lector);
         System.out.println("Lector registrado correctamente. ID asignado: " + nuevoId);
+    }
 
-     }
-     
-     static void listarLector()
-        throws IOException {
-        System.out.println("ID\t Nombre \t Apellido \tTelefono");
+    static void listarLectores() throws IOException {
+        System.out.println("ID\tNombre\tApellido\tTeléfono");
         for (Lector l : Lector.leerLector()) {
             System.out.println(l.getId() + "\t" + l.getName() + "\t" + l.getLastname() + "\t" + l.getCel());
         }
+    }
 
-     }
-     static void eliminarLector(){
-         int id = leerEntero("Ingrese el ID del lector a eliminar: ");
+    static void eliminarLector() throws IOException {
+        int id = leerEntero("Ingrese el ID del lector a eliminar: ");
         Lector.eliminarLector(id);
+    }
 
-     }
-   
-   
-
-      static void registrarPrestamo()
-       throws IOException {
+    static void registrarPrestamo() throws IOException {
         int idLector = leerEntero("Ingrese el ID del lector: ");
         if (!new Lector().existeLector(idLector)) {
             System.out.println("El lector no existe");
@@ -90,12 +81,14 @@ public class mostrarMenu{
         System.out.println("Préstamo registrado correctamente. ID asignado: " + nuevoId);
     }
 
-    static void listarPrestamosPorLector() 
-    throws IOException {
+    static void listarPrestamosPorLector() throws IOException {
         int idLector = leerEntero("Ingrese el ID del lector: ");
-        ConsultaPrestamo.listarPrestamosPorLector(idLector);
+        listarPrestamo.listap_lector(idLector);
     }
-    
+
+    static void salirdelMenu() {
+        System.out.println("Cerrando el sistema. Hasta pronto.");
+    }
 
     static int leerEntero(String msg) {
         while (true) {
@@ -108,4 +101,3 @@ public class mostrarMenu{
         }
     }
 }
-
