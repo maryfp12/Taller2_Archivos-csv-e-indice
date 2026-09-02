@@ -124,10 +124,11 @@ public class Lector {
         }
         return false;
     }
+    
     public static boolean tienePrestamos(int idLector)
      throws IOException {
-    List<Prestamo> prestamos = Prestamo.leerPrestamo();
-    for (Prestamo p : prestamos) {
+    List<prestamo> prestamos = prestamo.leerPrestamo();
+    for (prestamo p : prestamos) {
       if (p.getId_lector() == idLector && (p.getFecha_dev() == null || p.getFecha_dev().isEmpty())) {
             return true;
         }

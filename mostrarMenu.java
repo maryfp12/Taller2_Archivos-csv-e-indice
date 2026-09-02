@@ -1,6 +1,8 @@
 import java.io.IOException;
 import java.util.Scanner;
 
+import javax.crypto.spec.PBEKeySpec;
+
 public class mostrarMenu { 
     static Scanner sc = new Scanner(System.in); 
 
@@ -12,7 +14,7 @@ public class mostrarMenu {
             switch (opcion) {
                 case 1 : registrarUnlector(); 
                 break;
-                case 2 : listarLector();
+                case 2 : listarLectores();
                 break;
                 case 3 : eliminarLector();
                 break;
