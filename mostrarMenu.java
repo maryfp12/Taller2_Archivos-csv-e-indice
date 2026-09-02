@@ -17,7 +17,8 @@ public class mostrarMenu{
                 case 3 -> eliminarLector();
                 case 4 -> registrarPrestamo();
                 case 5 -> listarPrestamo();
-                case 6 -> salirdelMenu();
+                case 6 -> salirdelMenu(); 
+                System.out.println("Cerrando el sistema. Hasta pronto.");
                 default -> System.out.println("Opción inválida. Intente de nuevo.");
             }
             System.out.println();
@@ -57,7 +58,7 @@ public class mostrarMenu{
      
      static void listarLector()
         throws IOException {
-        System.out.println("ID\tNombre\tApellido\tTelefono");
+        System.out.println("ID\t Nombre \t Apellido \tTelefono");
         for (Lector l : Lector.leerLector()) {
             System.out.println(l.getId() + "\t" + l.getName() + "\t" + l.getLastname() + "\t" + l.getCel());
         }
@@ -68,15 +69,33 @@ public class mostrarMenu{
         Lector.eliminarLector(id);
 
      }
-     static void registrarPrestamo() {
+   
+   
 
-     }
-     static void listarPrestamo(){
+      static void registrarPrestamo()
+       throws IOException {
+        int idLector = leerEntero("Ingrese el ID del lector: ");
+        if (!new Lector().existeLector(idLector)) {
+            System.out.println("El lector no existe");
+            return;
+        }
+        System.out.print("Ingrese nombre del libro: ");
+        String libro = sc.nextLine();
+        System.out.print("Ingrese fecha del préstamo (YYYY-MM-DD): ");
+        String fechaPres = sc.nextLine();
 
-     }
-     static void salirdelMenu() {
+        int nuevoId = Prestamo.generarID();
+        Prestamo prestamo = new Prestamo(nuevoId, idLector, libro, fechaPres, "");
+        Prestamo.crearPrestamo(prestamo);
+        System.out.println("Préstamo registrado correctamente. ID asignado: " + nuevoId);
+    }
 
-     }
+    static void listarPrestamosPorLector() 
+    throws IOException {
+        int idLector = leerEntero("Ingrese el ID del lector: ");
+        ConsultaPrestamo.listarPrestamosPorLector(idLector);
+    }
+    
 
     static int leerEntero(String msg) {
         while (true) {
