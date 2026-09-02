@@ -11,13 +11,20 @@ public class mostrarMenu{
             mostrarMenu();
             opcion = leerEntero("seleccione una opción: ");
             switch (opcion) {
-                case 1 -> registrarUnlector();
-                case 2 -> listarLector();
-                case 3 -> eliminarLector();
-                case 4 -> registrarPrestamo();
-                case 5 -> listarPrestamo();
-                case 6 -> salirdelMenu();
-                default -> System.out.println("Opción inválida. Intente de nuevo.");
+                case 1 : registrarUnlector(); 
+                break;
+                case 2 : listarLector();
+                break;
+                case 3 : eliminarLector();
+                break;
+                case 4 : registrarPrestamo();
+                break;
+                case 5 : listarPrestamo();
+                break;
+                case 6 : salirdelMenu();
+                break;
+                default: System.out.println("Opción inválida. Intente de nuevo.");
+                break;
             }
             System.out.println();
         } while (opcion != 6);

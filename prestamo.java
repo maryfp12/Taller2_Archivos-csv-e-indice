@@ -66,7 +66,7 @@ public class Prestamo {
         return id_prestamo + "," + id_lector + "," + n_libro + "," + fecha_pres + "," + fecha_dev;
     }
 
-    public static void crearPrestamo(Prestamo prestamo) throws IOException {
+    public void crearPrestamo(Prestamo prestamo) throws IOException {
         FileWriter fw = new FileWriter("prestamos.csv", true);
         BufferedWriter bw = new BufferedWriter(fw);
         bw.write(prestamo.toString());
@@ -93,7 +93,7 @@ public class Prestamo {
 
 public static boolean existeIdPrestamo(int id_prestamo) throws IOException {
     List<Prestamo> lista = leerPrestamo();
-    for (prestamo p : lista) {
+    for (Prestamo p : lista) {
         if (p.getId_prestamo() == id_prestamo) {
             return true;
         }
