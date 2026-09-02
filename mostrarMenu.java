@@ -1,3 +1,4 @@
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -31,7 +32,7 @@ public class mostrarMenu{
         sc.close();
     }
      static void mostrarMenu() {
-        System.out.println("===  Gestión de lectores ===");
+        System.out.println("=== SISTEMA DE BIBLIOTECA ===");
         System.out.println("1. Registrar nuevo lector");
         System.out.println("2. Listar a un lector");
         System.out.println("3. Eliminar a un lector ");
@@ -40,12 +41,38 @@ public class mostrarMenu{
         System.out.println("6. Salir");
     }
 
-     static void registrarUnlector() {
+     static void registrarUnlector() 
+     throws IOException{
+        System.out.println("Ingrese nombre:");
+        String nombre = sc.nextLine();
+        System.out.print("Ingrese apellido: ");
+        String apellido = sc.nextLine();
+        System.out.print("Ingrese teléfono: ");
+        String telefono = sc.nextLine();
+
+        Lector lector = new Lector();
+        int nuevoId = lector.generarNuevoId();
+        lector.setId(nuevoId);
+        lector.setName(nombre);
+        lector.setLastname(apellido);
+        lector.setCel(telefono);
+
+        Lector.crearLector(lector);
+        System.out.println("Lector registrado correctamente. ID asignado: " + nuevoId);
+
      }
-     static void listarLector(){
+     
+     static void listarLector()
+        throws IOException {
+        System.out.println("ID\tNombre\tApellido\tTelefono");
+        for (Lector l : Lector.leerLector()) {
+            System.out.println(l.getId() + "\t" + l.getName() + "\t" + l.getLastname() + "\t" + l.getCel());
+        }
 
      }
      static void eliminarLector(){
+         int id = leerEntero("Ingrese el ID del lector a eliminar: ");
+        Lector.eliminarLector(id);
 
      }
      static void registrarPrestamo() {
